@@ -16,7 +16,7 @@ const Detail = async (props) => {
 
   return (
     <div className='container'>
-      <h4 className='title mt-2 mb-5  '>상세페이지</h4>
+      <h4 className='title mt-2 mb-3 '>상세페이지</h4>
 
       <div className='list'>
         <div className='list-item'>

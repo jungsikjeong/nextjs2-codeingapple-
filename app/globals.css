@@ -22,6 +22,15 @@ a {
 
 .logo {
   font-weight: bold;
+  margin-right: 10px;
+}
+
+.userInfo-wrap {
+  margin-top: 1rem;
+}
+
+.user-name {
+  font-size: 0.875rem;
 }
 
 .container {
@@ -38,9 +47,21 @@ a {
 .mb-5 {
   margin-bottom: 5rem;
 }
+.mb-3 {
+  margin-bottom: 3rem;
+}
 
 .mt-2 {
   margin-top: 2rem;
+}
+
+button {
+  border: 1px solid #eee;
+  border-radius: 5px;
+  width: 70px;
+  padding: 0.5rem 0;
+  transition: all 0.3s;
+  cursor: pointer;
 }
 
 .title {
@@ -74,6 +95,7 @@ a {
   height: 100vh;
   padding: 2.5rem;
   margin: 0 auto;
+  text-align: center;
 }
 
 .post-form {
@@ -82,6 +104,7 @@ a {
   margin: 0 auto;
   max-width: 30rem;
   width: 100%;
+  padding-top: 3rem;
 }
 
 .post-form input,
@@ -100,12 +123,7 @@ textarea {
 }
 
 .post-form button {
-  border: 1px solid #eee;
-  border-radius: 5px;
   width: 100px;
-  padding: 0.5rem 0;
-  transition: all 0.3s;
-  cursor: pointer;
 }
 
 .post-form button:hover {
@@ -121,9 +139,6 @@ textarea {
 }
 
 @media (min-width: 750px) {
-  .post-form {
-    /* padding-top: 10rem; */
-  }
 }
 
 @media (max-width: 750px) {

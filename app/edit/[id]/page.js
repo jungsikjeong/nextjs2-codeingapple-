@@ -11,7 +11,7 @@ const Edit = async (props) => {
 
   return (
     <div className='form-container'>
-      <h4 className='title mb-5'>수정페이지</h4>
+      <h4 className='title mb-3'>수정페이지</h4>
       <form action='/api/post/edit' method='POST' className='post-form '>
         <input type='text' name='title' defaultValue={result.title} />
         <textarea type='text' name='contents' defaultValue={result.contents} />
