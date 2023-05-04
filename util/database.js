@@ -1,7 +1,6 @@
 import { MongoClient } from 'mongodb';
 
-const url =
-  'mongodb+srv://wndtlr1024:qorrn1024@cluster0.ip8dsz4.mongodb.net/test';
+const url = process.env.MONGODB_URL;
 const options = { useNewUrlParser: true };
 let connectDB;
 

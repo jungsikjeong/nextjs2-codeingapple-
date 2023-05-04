@@ -3,7 +3,7 @@ import { connectDB } from '@/util/database';
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     let client = await connectDB;
-    const db = client.db('fourm');
+    const db = client.db('forum');
 
     let result = await db.collection('post').find().toArray();
 

@@ -13,6 +13,8 @@ const PostList = ({ result }) => {
         setTimeout(() => {
           e.target.parentElement.parentElement.style.display = 'none';
         }, 1000);
+      } else if (data.status === 400) {
+        alert('글 작성자가 아닙니다.');
       }
     });
   };

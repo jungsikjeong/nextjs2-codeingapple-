@@ -5,6 +5,8 @@ import LoginBtn from '@/component/LoginBtn';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import LogOutBtn from '@/component/LogOutBtn';
+import RegisterBtn from '@/component/RegisterBtn';
+import WriteBtn from '@/component/WriteBtn';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,10 +29,13 @@ export default async function RootLayout({ children }) {
           {session ? (
             <div className='userInfo-wrap'>
               <span className='user-name'>{session.user.name}</span> &nbsp;
+              <WriteBtn /> &nbsp;
               <LogOutBtn />
             </div>
           ) : (
-            <LoginBtn user={session.user} />
+            <>
+              <LoginBtn /> <RegisterBtn />
+            </>
           )}
         </div>
         {children}

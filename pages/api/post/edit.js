@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     const newBody = { title, contents };
 
     try {
-      const db = (await connectDB).db('fourm');
+      const db = (await connectDB).db('forum');
 
       const result = await db
         .collection('post')

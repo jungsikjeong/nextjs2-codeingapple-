@@ -1,14 +1,13 @@
-import { connectDB } from '@/util/database';
 import { ObjectId } from 'mongodb';
+import { getServerSession } from 'next-auth';
 
 // URL파라미터 문법 테스트
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
       let client = await connectDB;
-      const db = client.db('fourm');
+      const db = client.db('forum');
 
-      console.log(req.query);
       const result = await db
         .collection('post')
         .deleteOne({ _id: new ObjectId(req.query.id) });

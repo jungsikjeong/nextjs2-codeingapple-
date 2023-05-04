@@ -5,10 +5,11 @@
 import { connectDB } from '@/util/database';
 import { ObjectId } from 'mongodb';
 import Link from 'next/link';
+import Comment from './Comment';
 
 const Detail = async (props) => {
   let client = await connectDB;
-  const db = client.db('fourm');
+  const db = client.db('forum');
 
   let result = await db
     .collection('post')
@@ -18,17 +19,21 @@ const Detail = async (props) => {
     <div className='container'>
       <h4 className='title mt-2 mb-3 '>상세페이지</h4>
 
-      <div className='list'>
-        <div className='list-item'>
-          <div className='emoticon-box'>
-            <Link href={`/edit/${result._id}`}>✏️</Link>❌
+      {result && (
+        <div className='list'>
+          <div className='list-item'>
+            <div className='emoticon-box'>
+              <Link href={`/edit/${result._id}`}>✏️</Link>❌
+            </div>
+            <h4>
+              <span>{result.title}</span>
+            </h4>
+            <p>{result.contents}</p>
+
+            <Comment postId={result._id.toString()} />
           </div>
-          <h4>
-            <span>{result.title}</span>
-          </h4>
-          <p>{result.contents}</p>
         </div>
-      </div>
+      )}
     </div>
   );
 };

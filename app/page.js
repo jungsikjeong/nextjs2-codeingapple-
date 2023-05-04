@@ -16,7 +16,7 @@ export const revalidate = 60;
 
 const Home = async () => {
   let client = await connectDB;
-  const db = client.db('fourm');
+  const db = client.db('forum');
   let result = await db.collection('post').find().toArray();
 
   result = result.map((data) => {

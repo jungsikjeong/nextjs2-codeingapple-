@@ -15,6 +15,11 @@ a {
   text-decoration: none;
 }
 
+.loading {
+  padding: 1rem 0;
+  text-align: center;
+}
+
 .navbar {
   background: white;
   padding: 20px;
@@ -138,6 +143,36 @@ textarea {
   cursor: pointer;
 }
 
+.comment-wrap {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.comment-list:nth-last-child(2) {
+  margin-bottom: 1rem;
+}
+
+.comment-item {
+  font-size: 0.825rem;
+}
+
+.comment-input-wrap {
+  display: flex;
+}
+
+.comment-input {
+  width: 100%;
+  margin-right: 0.5rem;
+  border: 1px solid #eee;
+  line-height: 1.5;
+  outline: none;
+  padding: 0.5rem;
+}
+
+.comment-name {
+  font-size: 0.7rem;
+}
 @media (min-width: 750px) {
 }
 
