@@ -1,6 +1,7 @@
 import { connectDB } from '@/util/database';
 import Link from 'next/link';
 import PostList from './postList';
+import { ObjectId } from 'mongodb';
 
 // npm run build했을때의 html파일만을 보여줌 => 스태틱 래더링
 // npm run build, 동적으로 유저에게 html을 보여줌 => 다이나믹 랜더링
@@ -17,7 +18,13 @@ export const revalidate = 60;
 const Home = async () => {
   let client = await connectDB;
   const db = client.db('forum');
+
   let result = await db.collection('post').find().toArray();
+
+  // let postLike = await db
+  //   .collection('postLike')
+  //   .find({ postId: new ObjectId(props.params.id) })
+  //   .toArray();
 
   result = result.map((data) => {
     data._id = data._id.toString();

@@ -42,7 +42,7 @@ const Comment = ({ postId }) => {
 
   return (
     <div className='comment-wrap'>
-      <div>댓글 목록</div>
+      <div style={{ marginBottom: '.5rem' }}>댓글 목록</div>
 
       {loading ? (
         <div className='loading'>Loading...</div>

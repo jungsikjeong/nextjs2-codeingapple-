@@ -5,7 +5,7 @@ import Link from 'next/link';
 const PostList = ({ result }) => {
   const onRemove = (e, id) => {
     // fetch('/api/test?name=kim&age=20')서버에 데이터 보낼때 예시, 쿼리스트링
-    // fetch(`/api/${id}/remove`, { method: 'POST' }).then((data) => {
+    // fetch(`/api/${id}/remove`, { method: 'POST' }).then((data) => {}
 
     fetch(`/api/post/remove?id=${id}`, { method: 'POST' }).then((data) => {
       if (data.status === 200) {
@@ -30,6 +30,7 @@ const PostList = ({ result }) => {
           <h4>
             <Link href={`/detail/${data._id}`}>
               <span>{data.title}</span>
+              <span className='post-like-count'> ･ {data.postLikeCount}</span>
             </Link>
           </h4>
           <p>{data.contents}</p>

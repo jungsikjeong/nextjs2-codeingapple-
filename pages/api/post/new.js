@@ -8,7 +8,12 @@ export default async function handler(req, res) {
   let newBody = {};
 
   if (session) {
-    newBody = { title, contents, author: session.user.email };
+    newBody = {
+      title,
+      contents,
+      author: session.user.email,
+      postLikeCount: '0',
+    };
   }
   if (req.method === 'POST') {
     if (title === '') {
