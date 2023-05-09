@@ -5,7 +5,7 @@
 import { connectDB } from '@/util/database';
 import { ObjectId } from 'mongodb';
 import Link from 'next/link';
-// import Comment from './Comment';
+import Comment from './Comment';
 import PostLike from '../../../component/PostLike';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
@@ -52,7 +52,7 @@ const Detail = async (props) => {
 
             <PostLike postId={props.params.id} session={session} />
 
-            {/* <Comment postId={result._id.toString()} /> */}
+            <Comment postId={result._id.toString()} />
           </div>
         </div>
       )}
