@@ -1,3 +1,4 @@
+import FileUpload from '@/component/FileUpload';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { getServerSession } from 'next-auth';
 
@@ -11,6 +12,7 @@ const Write = async () => {
           <form action='/api/post/new' method='POST' className='post-form'>
             <input type='text' name='title' placeholder='글제목' />
             <textarea type='text' name='contents' placeholder='글내용' />
+            <FileUpload />
             <button type='submit'>글작성</button>
           </form>
         </div>
