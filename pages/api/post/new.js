@@ -4,31 +4,35 @@ import { authOptions } from '../auth/[...nextauth]';
 
 export default async function handler(req, res) {
   let session = await getServerSession(req, res, authOptions);
-  const { title, contents } = req.body;
-  let newBody = {};
-
-  if (session) {
-    newBody = {
-      title,
-      contents,
-      author: session.user.email,
-      postLikeCount: '0',
-    };
-  }
+  const { title, contents, src } = req.body;
+  console.log('src::', src);
   if (req.method === 'POST') {
-    if (title === '') {
-      return res.status(500).json('제목을 작성해주세요.');
-    }
+    if (session) {
+      if (title === '') {
+        return res.status(400).json('제목을 작성해주세요.');
+      }
 
-    let client = await connectDB;
-    const db = client.db('forum');
+      if (contents === '') {
+        return res.status(400).json('내용을 작성해주세요.');
+      }
 
-    try {
-      const result = await db.collection('post').insertOne(newBody);
-      res.redirect(302, '/');
-    } catch (error) {
-      res.status(400).json('에러발생', error);
-      console.log(error);
+      const newBody = {
+        title,
+        contents,
+        author: session.user.email,
+        postLikeCount: '0',
+        src: src ? src : '',
+      };
+
+      try {
+        const db = (await connectDB).db('forum');
+
+        const result = await db.collection('post').insertOne(newBody);
+        res.redirect(302, '/');
+      } catch (error) {
+        res.status(500).json('에러발생', error);
+        console.log('error:', error);
+      }
     }
   }
 }

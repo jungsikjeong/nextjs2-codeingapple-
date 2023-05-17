@@ -3,7 +3,7 @@ import { ObjectId } from 'mongodb';
 
 const Edit = async (props) => {
   let client = await connectDB;
-  const db = client.db('fourm');
+  const db = client.db('forum');
 
   let result = await db
     .collection('post')

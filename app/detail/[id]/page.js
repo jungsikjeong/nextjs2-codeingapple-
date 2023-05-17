@@ -35,9 +35,9 @@ const Detail = async (props) => {
       <h4 className='title mt-2 mb-3 '>상세페이지</h4>
 
       {result && (
-        <div className='list'>
+        <div className='list mb-5'>
           <div className='list-item'>
-            {session && (
+            {session?.user.email === result.author && (
               <div className='emoticon-box'>
                 <Link href={`/edit/${result._id}`}>✏️</Link>❌
               </div>
@@ -48,11 +48,15 @@ const Detail = async (props) => {
             </h4>
 
             <span className='post-like-count'> ･ {postLike.length}</span>
+            {result.src && (
+              <img src={result.src} alt='이미지' className='list-img' />
+            )}
+
             <p>{result.contents}</p>
 
             <PostLike postId={props.params.id} session={session} />
 
-            <Comment postId={result._id.toString()} />
+            <Comment postId={result._id.toString()} user={session?.user} />
           </div>
         </div>
       )}
