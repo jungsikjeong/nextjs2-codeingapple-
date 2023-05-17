@@ -37,24 +37,29 @@ const Detail = async (props) => {
       {result && (
         <div className='list mb-5'>
           <div className='list-item'>
-            {session?.user.email === result.author && (
+            {session && (
               <div className='emoticon-box'>
-                <Link href={`/edit/${result._id}`}>✏️</Link>❌
+                <PostLike postId={props.params.id} session={session} />
+                {session?.user.email === result.author && (
+                  <>
+                    <Link href={`/edit/${result._id}`}>✏️</Link>❌
+                  </>
+                )}
               </div>
             )}
 
-            <h4>
-              <span>{result.title}</span>
-            </h4>
+            <div>
+              <h4>
+                <span>{result.title}</span>
+              </h4>
 
-            <span className='post-like-count'> ･ {postLike.length}</span>
+              <span className='post-like-count'> ･ {postLike.length}</span>
+            </div>
             {result.src && (
               <img src={result.src} alt='이미지' className='list-img' />
             )}
 
             <p>{result.contents}</p>
-
-            <PostLike postId={props.params.id} session={session} />
 
             <Comment postId={result._id.toString()} user={session?.user} />
           </div>

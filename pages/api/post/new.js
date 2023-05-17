@@ -5,7 +5,7 @@ import { authOptions } from '../auth/[...nextauth]';
 export default async function handler(req, res) {
   let session = await getServerSession(req, res, authOptions);
   const { title, contents, src } = req.body;
-  console.log('src::', src);
+
   if (req.method === 'POST') {
     if (session) {
       if (title === '') {
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
         title,
         contents,
         author: session.user.email,
-        postLikeCount: '0',
+        postLikeCount: 0,
         src: src ? src : '',
       };
 

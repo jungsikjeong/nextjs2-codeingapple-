@@ -13,8 +13,6 @@ const PostList = ({ result, user }) => {
         setTimeout(() => {
           e.target.parentElement.parentElement.style.display = 'none';
         }, 1000);
-
-        fetch();
       } else if (data.status === 400) {
         alert('글 작성자가 아닙니다.');
       }
@@ -32,13 +30,17 @@ const PostList = ({ result, user }) => {
             </div>
           )}
 
-          <h4>
-            <Link href={`/detail/${data._id}`}>
-              <span>{data.title}</span>
-              <span className='post-like-count'> ･ {data.postLikeCount}</span>
-            </Link>
-          </h4>
+          <div>
+            <h4>
+              <Link href={`/detail/${data._id}`}>
+                <span>{data.title}</span>
+                <span className='post-like-count'> ･ {data.postLikeCount}</span>
+              </Link>
+            </h4>
+          </div>
+
           {data.src && <img src={data.src} alt='이미지' className='list-img' />}
+
           <p>{data.contents}</p>
         </div>
       ))}

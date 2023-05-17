@@ -25,11 +25,6 @@ const Home = async () => {
 
   let result = await db.collection('post').find().toArray();
 
-  // let postLike = await db
-  //   .collection('postLike')
-  //   .find({ postId: new ObjectId(props.params.id) })
-  //   .toArray();
-
   result = result.map((data) => {
     data._id = data._id.toString();
     return data;

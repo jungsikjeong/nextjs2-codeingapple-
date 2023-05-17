@@ -24,9 +24,11 @@ const PostLike = ({ postId, session }) => {
   return (
     <>
       {session && (
-        <div className='post-like-btn' onClick={() => onLikeBtnClick()}>
-          <span>👍</span>
-        </div>
+        <>
+          <span className='post-like-btn' onClick={() => onLikeBtnClick()}>
+            👍
+          </span>
+        </>
       )}
     </>
   );

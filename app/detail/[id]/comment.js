@@ -91,8 +91,8 @@ const Comment = ({ postId, user }) => {
         />
         <button onClick={onSubmit} style={{ width: '25%' }}>
           {loading ? (
-            <div class='square'>
-              <div class='spin'></div>
+            <div className='square'>
+              <div className='spin'></div>
             </div>
           ) : (
             <>댓글작성</>
