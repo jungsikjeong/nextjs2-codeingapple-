@@ -2,6 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import Loading from '../loading';
 
 const Write = () => {
   const [imageURL, setImageURL] = useState('');
@@ -16,7 +18,6 @@ const Write = () => {
     if (!e.target.files) return;
 
     const file = e.target.files[0];
-
     if (file) {
       let image = window.URL.createObjectURL(file);
 
@@ -28,86 +29,63 @@ const Write = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    // 이미지도 업로드하게된다면
+    if (title === '' || contents === '') {
+      return alert('제목과 내용을 모두 입력해주세요!');
+    }
+
+    let uploadResult;
+    let filename;
+
+    // 이미지를 업로드하면
     if (imageFile !== '') {
-      const filename = encodeURIComponent(imageFile.name);
+      const myUUID = uuidv4();
+      const shortenedUUID = myUUID.substr(0, 8); // 처음 8자리만 사용
+      filename = encodeURIComponent(`${shortenedUUID}_${imageFile.name}`);
 
-      let res = await fetch('/api/post/image?file=' + filename);
-      res = await res.json();
+      const imageRes = await fetch('/api/post/image?file=' + filename);
+      const imageJson = await imageRes.json();
 
-      //S3 업로드
       const formData = new FormData();
-      Object.entries({ ...res.fields, file: imageFile }).forEach(
+      Object.entries({ ...imageJson.fields, file: imageFile }).forEach(
         ([key, value]) => {
           formData.append(key, value);
         }
       );
 
-      let uploadResult = await fetch(res.url, {
+      uploadResult = await fetch(imageJson.url, {
         method: 'POST',
         body: formData,
       });
 
-      if (uploadResult.ok) {
-        const writeResult = await fetch('/api/post/new', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            title,
-            contents,
-            src: uploadResult.url + '/' + filename,
-          }),
-        });
-
-        // 글작성 성공시
-        if (writeResult.status === 200) {
-          router.push('/');
-
-          return;
-        }
-        // 글작성 에러시
-        if (writeResult.status === 400) {
-          const data = await writeResult.json();
-
-          alert(data);
-          return;
-        }
-      } else {
+      if (!uploadResult.ok) {
         alert('이미지 전송에 실패했습니다. 다시 시도해주세요');
         return;
       }
-    } else {
-      // 이미지없이 글만 작성한다면
-      const res = await fetch('/api/post/new', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          title,
-          contents,
-        }),
-      });
+    }
 
-      // 글작성 성공시
-      if (res.status === 200) {
-        router.push('/');
-      }
-      // 에러시
-      if (res.status === 400) {
-        const data = await res.json();
+    const postRes = await fetch('/api/post/new', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title,
+        contents,
+        src: imageFile !== '' ? uploadResult.url + '/' + filename : undefined,
+      }),
+    });
 
-        alert(data);
-      }
+    if (postRes.status === 200) {
+      router.push('/');
+    } else if (postRes.status === 400) {
+      const errorData = await postRes.json();
+      alert(errorData);
     }
   };
 
   return (
     <div className='form-container'>
       <h4 className='title'>글작성페이지</h4>
-
       <form className='post-form' onSubmit={onSubmit}>
         <input
           type='text'
@@ -127,7 +105,7 @@ const Write = () => {
         {imageURL && (
           <img
             src={imageURL}
-            alt='미리보기이미지'
+            alt='미리보기 이미지'
             style={{ marginBottom: '1rem' }}
           />
         )}

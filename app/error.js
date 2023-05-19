@@ -5,7 +5,8 @@ const Error = (props) => {
   return (
     <div>
       <h4>에러남 ㅅㄱ</h4>
-      <button onClick={() => reset()}>클릭시 페이지 다시 로드</button>
+      <p>다시 로드 해보셈 안되면 안되는거임</p>
+      {/* <button onClick={() => reset()}>클릭시 페이지 다시 로드</button> */}
     </div>
   );
 };

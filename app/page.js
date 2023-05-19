@@ -15,7 +15,7 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]';
 export const dynamic = 'force-dynamic';
 
 // ISR
-export const revalidate = 60;
+export const revalidate = 1;
 
 const Home = async () => {
   const session = await getServerSession(authOptions);
@@ -23,7 +23,12 @@ const Home = async () => {
   let client = await connectDB;
   const db = client.db('forum');
 
-  let result = await db.collection('post').find().toArray();
+  // let result = await db.collection('post').find().toArray();
+  let result = await db
+    .collection('post')
+    .find()
+    .sort({ createdAt: -1 })
+    .toArray();
 
   result = result.map((data) => {
     data._id = data._id.toString();

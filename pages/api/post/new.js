@@ -19,15 +19,20 @@ export default async function handler(req, res) {
       const newBody = {
         title,
         contents,
-        author: session.user.email,
+        author: {
+          email: session.user.email,
+          name: session.user.name, // 작성자의 이름을 추가
+        },
         postLikeCount: 0,
         src: src ? src : '',
+        createdAt: new Date(),
       };
 
       try {
         const db = (await connectDB).db('forum');
 
         const result = await db.collection('post').insertOne(newBody);
+
         res.redirect(302, '/');
       } catch (error) {
         res.status(500).json('에러발생', error);

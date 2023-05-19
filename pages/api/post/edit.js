@@ -3,9 +3,9 @@ import { ObjectId } from 'mongodb';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { title, contents, _id } = req.body;
+    const { title, contents, _id, src } = req.body;
 
-    const newBody = { title, contents };
+    const newBody = { title, contents, src };
 
     try {
       const db = (await connectDB).db('forum');

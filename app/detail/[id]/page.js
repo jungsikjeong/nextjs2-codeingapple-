@@ -10,6 +10,7 @@ import PostLike from '../../../component/PostLike';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { notFound } from 'next/navigation';
+import PostDeleteBtnComponent from '../../../component/PostDeleteBtnComponent';
 
 const Detail = async (props) => {
   const session = await getServerSession(authOptions);
@@ -32,7 +33,7 @@ const Detail = async (props) => {
 
   return (
     <div className='container'>
-      <h4 className='title mt-2 mb-3 '>상세페이지</h4>
+      <h4 className='title mb-3 '>상세페이지</h4>
 
       {result && (
         <div className='list mb-5'>
@@ -40,9 +41,10 @@ const Detail = async (props) => {
             {session && (
               <div className='emoticon-box'>
                 <PostLike postId={props.params.id} session={session} />
-                {session?.user.email === result.author && (
+                {session?.user.email === result.author.email && (
                   <>
-                    <Link href={`/edit/${result._id}`}>✏️</Link>❌
+                    <Link href={`/edit/${result._id}`}>✏️</Link>
+                    <PostDeleteBtnComponent id={props.params.id} />
                   </>
                 )}
               </div>
@@ -52,6 +54,8 @@ const Detail = async (props) => {
               <h4>
                 <span>{result.title}</span>
               </h4>
+
+              <span className='user-name'>by {result.author.name}</span>
 
               <span className='post-like-count'> ･ {postLike.length}</span>
             </div>

@@ -22,7 +22,7 @@ export default async function handler(req, res) {
         // 혹은 관리자 계정인지 확인
         // 일치하면 게시글 삭제시켜줌
         if (
-          session.user.email === post.author ||
+          session.user.email === post.author.email ||
           session.user.role === 'admin'
         ) {
           // 게시글 삭제
