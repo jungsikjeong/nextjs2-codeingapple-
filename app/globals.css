@@ -15,32 +15,9 @@ a {
   text-decoration: none;
 }
 
-@keyframes move {
-  0% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(50%, -100%);
-  }
-  100% {
-    transform: translate(100%, 0);
-  }
-}
-
 .moon,
 .sun {
-  position: relative;
-  display: inline-block;
-  animation: move 2s ease-in-out forwards;
   cursor: pointer;
-}
-
-.moon {
-  animation-delay: 0.1s;
-}
-
-.sun {
-  animation-delay: 0.2s;
 }
 
 .dark-mode .navbar {

@@ -1,12 +1,13 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function DarkMode({ res }) {
   const router = useRouter();
+  const spanRef = useRef();
 
-  const onClick = () => {
+  const onToggleMode = () => {
     if (res.value === 'dark') {
       document.cookie = 'mode=light; max-age=' + 3600 * 24 * 400;
       router.refresh();
@@ -26,14 +27,12 @@ export default function DarkMode({ res }) {
 
   return (
     <>
-      {res.value === 'dark' ? (
-        <span onClick={onClick} className='moon'>
-          {' '}
+      {res?.value === 'dark' ? (
+        <span onClick={onToggleMode} className='moon' ref={spanRef}>
           🌙
         </span>
       ) : (
-        <span onClick={onClick} className='sun'>
-          {' '}
+        <span onClick={onToggleMode} className='sun' ref={spanRef}>
           ☀️
         </span>
       )}

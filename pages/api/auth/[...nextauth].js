@@ -30,6 +30,7 @@ export const authOptions = {
         let user = await db
           .collection('user_cred')
           .findOne({ email: credentials.email });
+
         if (!user) {
           console.log('해당 이메일은 없음');
           return null;
@@ -74,7 +75,8 @@ export const authOptions = {
     },
   },
 
-  secret: process.env.secretKey,
+  secret: process.env.NEXTAUTH_SECRET,
+  // 세션이아니라 JWT면 이 코드는 삭제해도됨
   adapter: MongoDBAdapter(connectDB),
 };
 export default NextAuth(authOptions);

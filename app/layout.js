@@ -30,6 +30,8 @@ export default async function RootLayout({ children }) {
           <Link href='/' className='logo'>
             AppleForum 🍎
           </Link>
+          {session && <DarkMode res={res} />}
+
           {session ? (
             <div className='userInfo-wrap'>
               <span className='user-name'>{session.user.name}</span> &nbsp;
@@ -39,9 +41,10 @@ export default async function RootLayout({ children }) {
           ) : (
             <>
               <LoginBtn /> <RegisterBtn />
+              &nbsp;
+              <DarkMode res={res} />
             </>
           )}
-          <DarkMode res={res} />
         </div>
         {children}
       </body>
