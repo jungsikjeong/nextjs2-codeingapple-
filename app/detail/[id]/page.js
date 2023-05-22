@@ -5,12 +5,12 @@
 import { connectDB } from '@/util/database';
 import { ObjectId } from 'mongodb';
 import Link from 'next/link';
-import Comment from './Comment';
 import PostLike from '../../../component/PostLike';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { notFound } from 'next/navigation';
 import PostDeleteBtnComponent from '../../../component/PostDeleteBtnComponent';
+import Comment from './comment';
 
 const Detail = async (props) => {
   const session = await getServerSession(authOptions);
