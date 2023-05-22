@@ -7,7 +7,8 @@ export async function middleware(request) {
 
     if (session === null) {
       return NextResponse.redirect(
-        ('http://localhost:3000/api/auth/signin', request.url)
+        'http://localhost:3000/api/auth/signin',
+        request.url
       );
     }
   }
