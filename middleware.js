@@ -1,7 +1,7 @@
 import { getToken } from 'next-auth/jwt';
 const { NextResponse } = require('next/server');
 
-export async function middleware(req) {
+export async function middleware(request) {
   if (request.nextUrl.pathname.startsWith('/write')) {
     const session = await getToken({ req: request });
 
