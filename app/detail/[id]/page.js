@@ -11,6 +11,7 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { notFound } from 'next/navigation';
 import PostDeleteBtnComponent from '../../../component/PostDeleteBtnComponent';
 import Comment from './comment';
+import Image from 'next/image';
 
 const Detail = async (props) => {
   const session = await getServerSession(authOptions);
@@ -60,7 +61,15 @@ const Detail = async (props) => {
               <span className='post-like-count'> ･ {postLike.length}</span>
             </div>
             {result.src && (
-              <img src={result.src} alt='이미지' className='list-img' />
+              <Image
+                src={result.src}
+                alt='이미지'
+                className='list-img'
+                layout='responsive'
+                width={100}
+                height={100}
+                priority={true}
+              />
             )}
 
             <p>{result.contents}</p>

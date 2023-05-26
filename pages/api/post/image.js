@@ -17,5 +17,6 @@ export default async function handler(req, res) {
       ['content-length-range', 0, 1048576], //파일용량 1MB 까지 제한
     ],
   });
+
   res.status(200).json(url);
 }

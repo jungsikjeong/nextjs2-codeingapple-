@@ -15,11 +15,12 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]';
 export const dynamic = 'force-dynamic';
 
 // ISR
-export const revalidate = 1;
+export const revalidate = 10;
 
 const Home = async () => {
   const session = await getServerSession(authOptions);
 
+  console.log('session:', session);
   let client = await connectDB;
   const db = client.db('forum');
 

@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import PostLike from '@/component/PostLike';
 import PostDeleteBtnComponent from '@/component/PostDeleteBtnComponent';
+import Image from 'next/image';
+// import Image from 'next/legacy/image';
 
 const PostList = ({ result, user }) => {
   // const onRemove = (e, id) => {
@@ -40,13 +42,6 @@ const PostList = ({ result, user }) => {
               )}
             </div>
           )}
-          {/* 
-          {user?.email === data?.author.email && (
-            <div className='emoticon-box'>
-              <Link href={`/edit/${data._id}`}>✏️</Link>
-              <span onClick={(e) => onRemove(e, data._id)}>❌</span>
-            </div>
-          )} */}
 
           <div>
             <h4>
@@ -60,7 +55,17 @@ const PostList = ({ result, user }) => {
             </h4>
           </div>
 
-          {data.src && <img src={data.src} alt='이미지' className='list-img' />}
+          {data.src && (
+            <Image
+              src={data.src}
+              alt='이미지'
+              className='list-img'
+              layout='responsive'
+              width={500}
+              height={500}
+              priority={true}
+            />
+          )}
 
           <p>
             {data.contents.length > 30
