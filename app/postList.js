@@ -60,7 +60,6 @@ const PostList = ({ result, user }) => {
               src={data.src}
               alt='이미지'
               className='list-img'
-              layout='responsive'
               width={500}
               height={500}
               priority={true}
